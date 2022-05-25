@@ -1,15 +1,13 @@
 import RequirementsHandler
-import getpass
 import pysher
 import os
 import json
 from termcolor import colored
 from dotenv import load_dotenv
 from pusher import Pusher
-from database_handler import getUsers, connect, disconnect
+from server_handler import connect, disconnect
 load_dotenv(dotenv_path='.env')
 
-users = getUsers()
 user = ''
 
 
@@ -20,9 +18,6 @@ class terminalChat():
     clientPusher = None
     user = None
     chatrooms = ["supersecreto"]
-
-    def __init__(self, users) -> None:
-        self.users = users
 
     def main(self):
         ''' The entry point of the application'''
@@ -40,18 +35,6 @@ class terminalChat():
             return True
         else:
             self.login()
-
-        # username = input("Enter your username: ")
-        # if username in self.users:
-        #     password = getpass.getpass("Password:")
-        #     if self.users[username] == password:
-        #         self.user = username
-        #     else:
-        #         print(colored("Password is incorrect", "red"))
-        #         self.login()
-        # else:
-        #     print(colored("Username is incorrect", "red"))
-        #     self.login()
 
     def selectChatroom(self):
         ''' This function is used to select which chatroom will connect to '''
@@ -93,8 +76,7 @@ class terminalChat():
 
 
 try:
-    if users:
-        terminalChat(users).main()
+    terminalChat().main()
 except KeyboardInterrupt:
     disconnect(user)
     print('Bye')
