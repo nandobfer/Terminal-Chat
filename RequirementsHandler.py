@@ -1,10 +1,13 @@
-import os, importlib
+import os
+import importlib
+
 
 def readRequirements():
     with open("requirements.txt", "r") as file:
-            file = file.read()
-            requirements = file.split('\n')
+        file = file.read()
+        requirements = file.split('\n')
     return requirements
+
 
 def getRequirements():
     requirements = readRequirements()
@@ -22,6 +25,7 @@ def getRequirements():
             except:
                 print(f'Não foi possivel baixar o modulo: {requirement}')
 
+
 def installModule(install_name, import_name):
 
     try:
@@ -36,6 +40,12 @@ def installModule(install_name, import_name):
             print(f'Modulo instalado: {install_name}')
             return True
         except:
-            return False
+            try:
+                os.system(f'pip install {install_name}')
+                print(f'Modulo instalado: {install_name}')
+                return True
+            except:
+                return False
+
 
 getRequirements()
