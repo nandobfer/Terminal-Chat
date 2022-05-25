@@ -13,7 +13,7 @@ def signup():
 
     print('Signing a new user up\n')
     user = {'signup': getInputs()}
-    response = requests.post(url, data=str(user))
+    response = requests.post(url, data=user)
     print(response.text)
 
 

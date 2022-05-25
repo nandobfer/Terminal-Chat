@@ -57,7 +57,7 @@ class terminalChat():
 
     def getInput(self):
         ''' This function is used to get the user's current message '''
-        message = input(colored("{}: ".format(self.user), "green"))
+        message = input()
         self.pusher.trigger(self.chatroom, u'newmessage', {
                             'user': self.user, 'message': message})
 
@@ -81,7 +81,7 @@ class terminalChat():
         if message['user'] != self.user:
             print(colored("{}: {}".format(
                 message['user'], message['message']), "blue"))
-            print(colored("{}: ".format(self.user), "green"))
+            # print(colored("{}: ".format(self.user), "green"))
 
 
 if __name__ == "__main__":
