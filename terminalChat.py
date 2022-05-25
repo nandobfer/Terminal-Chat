@@ -55,12 +55,6 @@ class terminalChat():
             print(colored("No such chatroom in our list", "red"))
             self.selectChatroom()
 
-    def getInput(self):
-        ''' This function is used to get the user's current message '''
-        message = input(colored("{}: ".format(self.user), "green"))
-        self.pusher.trigger(self.chatroom, u'newmessage', {
-                            'user': self.user, 'message': message})
-
     def initPusher(self):
         ''' This function initializes both the Http server Pusher as well as the clientPusher'''
         self.pusher = Pusher(app_id=os.getenv('PUSHER_APP_ID', None), key=os.getenv(
@@ -82,6 +76,12 @@ class terminalChat():
             print(colored("{}: {}".format(
                 message['user'], message['message']), "blue"))
         # print(colored("{}: ".format(self.user), "green"))
+
+    def getInput(self):
+        ''' This function is used to get the user's current message '''
+        message = input()
+        self.pusher.trigger(self.chatroom, u'newmessage', {
+                            'user': self.user, 'message': message})
 
 
 if __name__ == "__main__":
