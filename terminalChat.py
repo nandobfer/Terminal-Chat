@@ -6,10 +6,11 @@ import json
 from termcolor import colored
 from dotenv import load_dotenv
 from pusher import Pusher
-from database_handler import getUsers
+from database_handler import getUsers, connect, disconnect
 load_dotenv(dotenv_path='.env')
 
 users = getUsers()
+user = ''
 
 
 class terminalChat():
@@ -25,25 +26,32 @@ class terminalChat():
 
     def main(self):
         ''' The entry point of the application'''
-        # self.login()
-        self.user = input('username: ')
+        self.login()
         self.selectChatroom()
         while True:
             self.getInput()
 
     def login(self):
         ''' This function handles login'''
-        username = input("Enter your username: ")
-        if username in self.users:
-            password = getpass.getpass("Password:")
-            if self.users[username] == password:
-                self.user = username
-            else:
-                print(colored("Password is incorrect", "red"))
-                self.login()
+        global user
+        self.user = input('username: ')
+        if connect(self.user):
+            user = self.user
+            return True
         else:
-            print(colored("Username is incorrect", "red"))
             self.login()
+
+        # username = input("Enter your username: ")
+        # if username in self.users:
+        #     password = getpass.getpass("Password:")
+        #     if self.users[username] == password:
+        #         self.user = username
+        #     else:
+        #         print(colored("Password is incorrect", "red"))
+        #         self.login()
+        # else:
+        #     print(colored("Username is incorrect", "red"))
+        #     self.login()
 
     def selectChatroom(self):
         ''' This function is used to select which chatroom will connect to '''
@@ -84,9 +92,9 @@ class terminalChat():
                             'user': self.user, 'message': message})
 
 
-if __name__ == "__main__":
-    try:
-        if users:
-            terminalChat(users).main()
-    except KeyboardInterrupt:
-        print('Bye')
+try:
+    if users:
+        terminalChat(users).main()
+except KeyboardInterrupt:
+    disconnect(user)
+    print('Bye')
