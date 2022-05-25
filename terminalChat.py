@@ -7,7 +7,7 @@ from termcolor import colored
 from dotenv import load_dotenv
 from pusher import Pusher
 from database_handler import getUsers
-import click
+# import click
 load_dotenv(dotenv_path='.env')
 
 users = getUsers()
