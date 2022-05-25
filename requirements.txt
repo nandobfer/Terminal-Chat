@@ -1,3 +1,4 @@
+pysher git+https://github.com/nlsdfnbch/Pysher.git
 termcolor
 pusher
-dotenv git+https://github.com/nlsdfnbch/Pysher.git python-dotenv
+dotenv python-dotenv
