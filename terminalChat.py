@@ -42,6 +42,9 @@ class terminalChat():
         if chatroom in self.chatrooms:
             self.chatroom = chatroom
             self.initPusher()
+            self.pusher.trigger(self.chatrooms[0], u'newmessage', {
+                'user': 'system', 'message': self.user+' connected'})
+
         else:
             print(colored("No such chatroom in our list", "red"))
             self.selectChatroom()
@@ -63,9 +66,12 @@ class terminalChat():
 
     def pusherCallback(self, message):
         message = json.loads(message)
-        if message['user'] != self.user:
+        if message['user'] != self.user and message['user'] != 'system':
             print(colored("{}: {}".format(
                 message['user'], message['message']), "blue"))
+        elif message['user'] == 'system':
+            print(colored("{}: {}".format(
+                message['user'], message['message']), "green"))
         # print(colored("{}: ".format(self.user), "green"))
 
     def getInput(self):
@@ -79,4 +85,3 @@ try:
     terminalChat().main()
 except KeyboardInterrupt:
     disconnect(user)
-    print('Bye')
