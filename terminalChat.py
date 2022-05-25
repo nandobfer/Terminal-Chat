@@ -7,6 +7,7 @@ from termcolor import colored
 from dotenv import load_dotenv
 from pusher import Pusher
 from database_handler import getUsers
+import click
 load_dotenv(dotenv_path='.env')
 
 users = getUsers()
@@ -57,7 +58,7 @@ class terminalChat():
 
     def getInput(self):
         ''' This function is used to get the user's current message '''
-        message = input()
+        message = input(colored("{}: ".format(self.user), "green"))
         self.pusher.trigger(self.chatroom, u'newmessage', {
                             'user': self.user, 'message': message})
 
@@ -81,9 +82,12 @@ class terminalChat():
         if message['user'] != self.user:
             print(colored("{}: {}".format(
                 message['user'], message['message']), "blue"))
-            # print(colored("{}: ".format(self.user), "green"))
+        # print(colored("{}: ".format(self.user), "green"))
 
 
 if __name__ == "__main__":
-    if users:
-        terminalChat(users).main()
+    try:
+        if users:
+            terminalChat(users).main()
+    except KeyboardInterrupt:
+        print('Bye')
