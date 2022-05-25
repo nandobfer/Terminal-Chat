@@ -41,7 +41,7 @@ def installModule(install_name, import_name):
             return True
         except:
             try:
-                os.system(f'pip install {install_name}')
+                os.system(f'pip3 install {install_name}')
                 print(f'Modulo instalado: {install_name}')
                 return True
             except:
