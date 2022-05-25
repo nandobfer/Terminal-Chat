@@ -1,5 +1,6 @@
 import os
 import importlib
+from platform import platform
 
 
 def readRequirements():
@@ -28,6 +29,8 @@ def getRequirements():
 
 def installModule(install_name, import_name):
 
+    system = platform().split('-')[0]
+
     try:
         module = importlib.import_module(import_name)
         print(f'Modulo {import_name} ja instalado')
@@ -36,8 +39,10 @@ def installModule(install_name, import_name):
         print(f'Modulo nao encontrado: {import_name}')
         print(f'Tentando instalar automaticamente')
         try:
-            os.system(f'pip install {install_name}')
-            os.system(f'pip3 install {install_name}')
+            if system == 'Windows':
+                os.system(f'pip install {install_name}')
+            elif system == 'Linux':
+                os.system(f'pip3 install {install_name}')
             print(f'Modulo instalado: {install_name}')
             return True
         except:
