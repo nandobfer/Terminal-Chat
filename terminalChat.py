@@ -26,14 +26,14 @@ class terminalChat():
 
     def main(self):
         ''' The entry point of the application'''
-        self.login()
+        # self.login()
+        self.user = input('username: ')
         self.selectChatroom()
         while True:
             self.getInput()
 
     def login(self):
-        ''' This function handles login to the system. In a real-world app, 
-        you might need to connect to API's or a database to verify users '''
+        ''' This function handles login'''
         username = input("Enter your username: ")
         if username in self.users:
             password = getpass.getpass("Password:")
