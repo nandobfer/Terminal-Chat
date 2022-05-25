@@ -6,7 +6,10 @@ import json
 from termcolor import colored
 from dotenv import load_dotenv
 from pusher import Pusher
+from database_handler import getUsers
 load_dotenv(dotenv_path='.env')
+
+users = getUsers()
 
 
 class terminalChat():
@@ -15,11 +18,10 @@ class terminalChat():
     chatroom = None
     clientPusher = None
     user = None
-    users = {
-        "burgos": "mfux6xpj",
-        "yah": "linda"
-    }
     chatrooms = ["supersecreto"]
+
+    def __init__(self, users) -> None:
+        self.users = users
 
     def main(self):
         ''' The entry point of the application'''
@@ -83,4 +85,5 @@ class terminalChat():
 
 
 if __name__ == "__main__":
-    terminalChat().main()
+    if users:
+        terminalChat(users).main()

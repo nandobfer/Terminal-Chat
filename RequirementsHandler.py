@@ -39,9 +39,9 @@ def installModule(install_name, import_name):
         print(f'Modulo nao encontrado: {import_name}')
         print(f'Tentando instalar automaticamente')
         try:
-            if system == 'Windows':
+            if not system == 'Linux':
                 os.system(f'pip install {install_name}')
-            elif system == 'Linux':
+            else:
                 os.system(f'pip3 install {install_name}')
             print(f'Modulo instalado: {install_name}')
             return True
