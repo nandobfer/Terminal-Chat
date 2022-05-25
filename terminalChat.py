@@ -42,7 +42,7 @@ class terminalChat():
         self.initPusher()
         # print in the channel the user has connected
         self.pusher.trigger(self.chatrooms[0], u'newmessage', {
-            'user': 'system', 'message': self.user+' disconnected'})
+            'user': 'system', 'message': user+' disconnected'})
 
     def selectChatroom(self):
         ''' This function is used to select which chatroom will connect to '''
