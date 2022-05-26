@@ -33,7 +33,7 @@ def installModule(install_name, import_name):
 
     try:
         module = importlib.import_module(import_name)
-        print(f'Modulo {import_name} ja instalado')
+        # print(f'Modulo {import_name} ja instalado')
         return True
     except:
         print(f'Modulo nao encontrado: {import_name}')
