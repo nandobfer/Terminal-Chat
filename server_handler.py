@@ -14,7 +14,7 @@ def connect(username):
     try:
         users = eval(response.text)
         print(colored("Connected.", "green"))
-        print(colored("Users: "+users, "yellow"))
+        print(colored("Users: "+str(users), "yellow"))
         return True
     except:
         print(response.text)

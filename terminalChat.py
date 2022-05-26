@@ -17,7 +17,7 @@ class terminalChat():
     chatroom = None
     clientPusher = None
     user = None
-    chatrooms = ["chat"]
+    chatrooms = ["supersecreto"]
 
     def main(self):
         ''' The entry point of the application'''
@@ -37,14 +37,12 @@ class terminalChat():
             self.login()
 
     def disconnect(self):
-        ''' Disconnect the user from server '''
         global user
         self.chatroom = self.chatrooms[0]
         self.initPusher()
-        # print in the channel the user has disconnected
+        # print in the channel the user has connected
         self.pusher.trigger(self.chatrooms[0], u'newmessage', {
             'user': 'system', 'message': user+' disconnected'})
-        disconnect(user)
 
     def selectChatroom(self):
         ''' This function is used to select which chatroom will connect to '''
@@ -96,3 +94,4 @@ try:
     terminalChat().main()
 except KeyboardInterrupt:
     terminalChat().disconnect()
+    disconnect(user)
