@@ -1,6 +1,7 @@
 import requests
 import json
 from config import host
+from termcolor import colored
 
 
 def connect(username):
@@ -12,8 +13,8 @@ def connect(username):
     response = requests.post(url, data=send_data)
     try:
         users = eval(response.text)
-        print('Connected.')
-        print(users)
+        print(colored("Connected.", "green"))
+        print(colored("Users: "+users, "yellow"))
         return True
     except:
         print(response.text)
@@ -26,4 +27,4 @@ def disconnect(username):
         'user': username
     }
     response = requests.post(url, data=send_data)
-    print(response.text)
+    print(colored(response.text, "yellow"))
