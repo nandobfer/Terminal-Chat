@@ -1,4 +1,4 @@
-import RequirementsHandler
+import reqcheq
 import pysher
 import os
 import json
@@ -17,7 +17,7 @@ class terminalChat():
     chatroom = None
     clientPusher = None
     user = None
-    chatrooms = ["supersecreto"]
+    chatrooms = ["chatroom"]
 
     def main(self):
         ''' The entry point of the application'''
@@ -37,6 +37,7 @@ class terminalChat():
             self.login()
 
     def disconnect(self):
+        ''' Disconnect the user from the server '''
         global user
         self.chatroom = self.chatrooms[0]
         self.initPusher()
