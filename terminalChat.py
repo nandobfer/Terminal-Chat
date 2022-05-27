@@ -1,4 +1,3 @@
-import reqcheq
 import pysher
 import os
 import json
@@ -90,9 +89,10 @@ class terminalChat():
         self.pusher.trigger(self.chatroom, u'newmessage', {
                             'user': self.user, 'message': message})
 
-
-try:
-    terminalChat().main()
-except KeyboardInterrupt:
-    terminalChat().disconnect()
-    disconnect(user)
+def run():
+    global user
+    try:
+        terminalChat().main()
+    except KeyboardInterrupt:
+        terminalChat().disconnect()
+        disconnect(user)
