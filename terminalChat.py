@@ -96,3 +96,6 @@ def run():
     except KeyboardInterrupt:
         terminalChat().disconnect()
         disconnect(user)
+
+if __name__ == '__main__':
+    run()
