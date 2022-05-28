@@ -4,9 +4,9 @@ from config import host
 from termcolor import colored
 
 
-def connect(username, url = f'http://{host}/connect/'):
+def connect(username, url=f'http://{host}/connect/'):
     print("Connecting to server")
-    
+
     send_data = {
         'user': username
     }
@@ -21,7 +21,8 @@ def connect(username, url = f'http://{host}/connect/'):
         if response.text == 'user already connected':
             option = input('wanna override? [y/n] ')
             if option.lower() == 'y':
-                connect(username, url = f'http://{host}/force_connect/')
+                connect(username, url=f'http://{host}/force_connect/')
+                return True
             else:
                 return False
 
