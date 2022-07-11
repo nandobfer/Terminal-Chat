@@ -1,3 +1,3 @@
 # aws host ip
-host = '34.236.150.254'
+host = '162.214.166.106'
 # host = 'localhost:8080'
